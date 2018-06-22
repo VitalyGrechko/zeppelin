@@ -804,6 +804,11 @@ public class OldSparkInterpreter extends AbstractSparkInterpreter {
           }
         }
       }
+      String precode = getProperty("precode");
+      if (precode != null) {
+        interpret(precode);
+      }
+
     }
 
     /* Temporary disabling DisplayUtils. see https://issues.apache.org/jira/browse/ZEPPELIN-127
