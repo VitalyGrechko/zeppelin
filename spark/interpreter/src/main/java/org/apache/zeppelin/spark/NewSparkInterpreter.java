@@ -126,6 +126,32 @@ public class NewSparkInterpreter extends AbstractSparkInterpreter {
     }
   }
 
+  private void printR(InterpreterResult r) {
+    if (r.code() == InterpreterResult.Code.SUCCESS) {
+      LOGGER.info("SUCCESS");
+    } else if (r.code() == InterpreterResult.Code.INCOMPLETE) {
+      LOGGER.info("INCOMPLETE");
+    } else {
+      LOGGER.info("ERROR");
+    }
+  }
+  
+  @Override
+  public void interpretStmt(String code) {
+    this.innerInterpreter.interpret(code);
+  }
+
+  @Override
+  public Object interpretEval(String code) {
+    java.util.HashMap<String, Object> results = new java.util.HashMap<String, Object>();
+    List<String> modifiers = new ArrayList<String>();
+    modifiers.add("@transient");
+    this.innerInterpreter.bind("_results", "java.util.HashMap[String,Object]", results, modifiers);
+    this.innerInterpreter.interpret("@transient val _result = " + code);
+    this.innerInterpreter.interpret("_results.put(\"result\", _result)");
+    return results.get("result");
+  }
+
   @Override
   public void close() {
     LOGGER.info("Close SparkInterpreter");

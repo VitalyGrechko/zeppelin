@@ -74,6 +74,16 @@ public class SparkInterpreter extends AbstractSparkInterpreter {
   }
 
   @Override
+  public void interpretStmt(String code) {
+    delegation.interpretStmt(code);
+  }
+
+  @Override
+  public Object interpretEval(String code) {
+    return delegation.interpretEval(code);
+  }
+
+  @Override
   public void cancel(InterpreterContext context) throws InterpreterException {
     delegation.cancel(context);
   }

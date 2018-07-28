@@ -907,6 +907,21 @@ public class OldSparkInterpreter extends AbstractSparkInterpreter {
     return null;
   }
 
+  @Override
+  public void interpretStmt(String code) {
+    synchronized (sharedInterpreterLock) {
+      interpret(code);
+    }
+  }
+
+  @Override
+  public Object interpretEval(String code) {
+    synchronized (sharedInterpreterLock) {
+      interpret(code);
+      return getLastObject();
+    }
+  }
+
   private Results.Result interpret(String line) {
     out.ignoreLeadingNewLinesFromScalaReporter();
     return (Results.Result) Utils.invokeMethod(

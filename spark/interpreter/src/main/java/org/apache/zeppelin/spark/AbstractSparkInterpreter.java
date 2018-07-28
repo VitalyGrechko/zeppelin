@@ -64,4 +64,7 @@ public abstract class AbstractSparkInterpreter extends Interpreter {
   public SparkInterpreter getParentSparkInterpreter() {
     return parentSparkInterpreter;
   }
+
+  public abstract void interpretStmt(String code);
+  public abstract Object interpretEval(String code);
 }
