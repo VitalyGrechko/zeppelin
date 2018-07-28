@@ -109,6 +109,12 @@ public class SparkSqlInterpreter extends Interpreter {
     String jobDesc = "Started by: " + Utils.getUserName(context.getAuthenticationInfo());
     sc.setJobGroup(Utils.buildJobGroupId(context), jobDesc, false);
     Object rdd = null;
+
+    sparkInterpreter.interpretStmt("import mcdp.SCProcedures.implicits._;");
+    st = String.valueOf(sparkInterpreter.interpretEval(
+      "sqlContext.prepareQuery(\"\"\"" + st + "\"\"\")"));
+
+
     try {
       // method signature of sqlc.sql() is changed
       // from  def sql(sqlText: String): SchemaRDD (1.2 and prior)
