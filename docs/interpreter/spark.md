@@ -104,13 +104,13 @@ You can also set other Spark properties which are not listed in the table. For a
     <td>Local repository for dependency loader</td>
   </tr>
   <tr>
-    <td>PYSPARK_PYTHON</td>
+    <td><code>PYSPARK_PYTHON</code></td>
     <td>python</td>
     <td>Python binary executable to use for PySpark in both driver and workers (default is <code>python</code>).
             Property <code>spark.pyspark.python</code> take precedence if it is set</td>
   </tr>
   <tr>
-    <td>PYSPARK_DRIVER_PYTHON</td>
+    <td><code>PYSPARK_DRIVER_PYTHON</code></td>
     <td>python</td>
     <td>Python binary executable to use for PySpark in driver only (default is <code>PYSPARK_PYTHON</code>).
             Property <code>spark.pyspark.driver.python</code> take precedence if it is set</td>
@@ -360,8 +360,10 @@ This is to make the server communicate with KDC.
 
 3. Add the two properties below to Spark configuration (`[SPARK_HOME]/conf/spark-defaults.conf`):
 
-        spark.yarn.principal
-        spark.yarn.keytab
+    ```
+    spark.yarn.principal
+    spark.yarn.keytab
+    ```
 
   > **NOTE:** If you do not have permission to access for the above spark-defaults.conf file, optionally, you can add the above lines to the Spark Interpreter setting through the Interpreter tab in the Zeppelin UI.
 
